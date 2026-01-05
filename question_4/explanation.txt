@@ -1,0 +1,130 @@
+task1:
+command:
+uptime -p
+
+output:
+up 3 hours, 20 minutes
+
+Explanation:
+I used the uptime command with the -p (pretty) flag to check how long my system has been running. I observed a simple output that displays the time elapsed since the last boot in hours and minutes. This is useful for me to determine if a system restart is necessary for updates or performance maintenance.
+
+
+
+task2:
+command:
+ps -u $USER
+Explanation:
+I used the ps command with the -u flag followed by the $USER variable to filter the process list to only those owned by my account. I observed a list containing the PID (Process ID), TTY (terminal type), TIME (CPU time used), and the CMD (the actual command or executable name). This allows me to monitor my active tasks without being distracted by system-level processes running in the background.
+
+output:
+  PID TTY          TIME CMD
+    365 ?        00:00:00 systemd
+    366 ?        00:00:00 (sd-pam)
+    397 pts/1    00:00:00 bash
+    532 pts/0    00:00:00 bash
+   1317 pts/0    00:00:00 man
+   1325 pts/0    00:00:00 pager
+   1489 pts/0    00:00:00 man
+   1497 pts/0    00:00:00 pager
+   5259 pts/0    00:00:00 ps
+
+
+task3:
+command:
+ps -u $USER --sort=-%cpu | head -n 2
+
+output:
+  PID TTY          TIME CMD
+    532 pts/0    00:00:00 bash
+
+Explanation:
+I used the ps command with the -u $USER flag to target my own processes, combined with the --sort=-%cpu option to rank them by CPU consumption in descending order. By piping the result into head -n 2, I isolated the header and the single most demanding process. I observed the %CPU column to identify exactly which task is currently placing the highest load on my processor.
+
+
+
+task4:
+command:
+sleep 300 &
+jobs
+output:
+
+[3] 5338
+[1]-  Stopped                 man mkdir  (wd: /mnt/d/My PC/Desktop/linux_lab_assignment/question_1)
+[2]+  Stopped                 man mkdir  (wd: /mnt/d/My PC/Desktop/linux_lab_assignment/question_1)
+[3]   Running                 sleep 300 &
+
+Explanation:I initiated a sleep command for 300 seconds and added the ampersand (&) at the end to send it directly to the background. This allows me to continue using my terminal while the command runs. I then used the jobs command to verify its status. I observed that the process is listed as "Running" and assigned a job number (e.g., [1]), confirming it is active in the background.
+
+
+
+task5:
+command:
+ps -u $USER | grep sleep
+renice +5 -p 5338
+ps -o pid,ni,comm -p 5338
+
+output:
+1: 5338 pts/0    00:00:00 sleep
+2:renice: failed to get priority for 5338 (process ID): No such process
+[3]   Done                    sleep 300
+3:  PID  NI COMMAND
+
+Explanation:First, I ran ps -u $USER | grep sleep to find the exact Process ID of my background task, which I identified as 5338. I then used the renice command to increase its nice value to +5. By doing this, I have lowered the process's priority, making it "nicer" to other tasks on my system. To verify the change, I used ps with custom output formatting and observed that the NI column now correctly displays 5.
+
+
+task6:
+command:
+free -h
+
+output:
+     total        used        free      shared  buff/cache   available
+Mem:           7.7Gi       490Mi       7.1Gi       3.6Mi       225Mi       7.2Gi
+Swap:          2.0Gi          0B       2.0Gi
+
+
+Explanation:
+I used the free command with the -h flag to display the amount of free and used memory in my system. I observed the statistics for both physical RAM and swap memory, presented in easy-to-read units like Megabytes (M) and Gigabytes (G). This allows me to quickly determine how much of my system's memory is currently occupied by running applications and how much is available for new tasks.
+
+
+
+task7:
+command:
+df -h ~
+
+output:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G  1.8G  954G   1% /
+
+Explanation:
+I used the df (disk free) command with the -h flag and pointed it specifically to my home directory (~). This allows me to see the disk space usage of the specific partition where my home directory is mounted. I observed the total size, used space, available space, and the capacity percentage. By using the -h flag, the sizes are displayed in human-readable units like GB or MB, making it much easier for me to interpret the results.
+
+
+
+task8:
+command:
+echo $0
+
+output:
+-bash
+
+Explanation:
+I used the echo $0 command to identify the shell I am currently using. In a Linux terminal, the special variable $0 stores the name of the shell or the script currently being executed. I observed that the output is bash (or -bash if it's a login shell), which confirms that I am working within the Bourne Again Shell environment.
+
+
+
+task9:
+command:
+ uname -a > system_report.txt
+
+Explanation:
+I chose the uname -a command, which provides a summary of my system's kernel version, architecture, and operating system. I used the > operator to redirect the standard output into a new file named system_report.txt. Instead of displaying the information on the terminal screen, the shell captured the text and saved it directly into the file. I verified this by checking the directory, where I observed that system_report.txt had been created successfully.
+
+
+
+task10:
+command:
+ncdu ~
+Explanation:
+I used the ncdu (NCurses Disk Usage) command to analyze my home directory. Unlike the standard du command, ncdu provides me with an interactive, text-based interface. I observed a ranked list of my files and folders, with the largest items at the top. I used the arrow keys to navigate through the directories and the Enter key to look inside folders to see exactly which subdirectories or files are consuming the most disk space.
+
+

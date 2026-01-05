@@ -1,0 +1,79 @@
+task1:
+commands:
+ mkdir ~/documents
+
+output:
+
+Explanation:
+I used the mkdir command to create a new folder named "documents" within the home directory (~). I observed that the directory was successfully created, providing a dedicated space for project-related files.
+
+task2:
+command:
+cd ~/documents && touch plan.txt
+
+Explanation:
+I used the cd command to enter the "documents" folder and the touch command to create an empty file named plan.txt. I observed that the shell successfully changed the working directory and initialized the new file in that location.
+
+task3:
+command:
+echo "Note: Complete the initial project outline and review the milestones by Friday." > plan.txt
+
+Explanation:
+I used the echo command with the redirection operator to write a project reminder into plan.txt. I observed that the text was successfully saved, replacing any previous content in the file.
+
+
+
+
+task4:
+command:
+ls -l plan.txt
+output:
+-rw-r--r-- 1 mifta mifta 80 Jan  4 23:07 plan.txt
+Explanation:
+I executed the ls command with the -l flag to view the long-format details of plan.txt. I observed the output displaying the file permissions, your username as the owner, and the associated group.
+
+
+
+task5:
+command:
+cp plan.txt plan_copy.txt
+Explanation:I executed the cp command to duplicate the original file. I observed that a new file named plan_copy.txt was created in the same directory with identical content to the original.
+
+
+
+task6:
+command:
+mv ~/documents ~/project_documents
+Explanation:
+I used the mv command to rename the directory from "documents" to "project_documents". I observed that the directory path was updated successfully, reflecting the new name while preserving all files inside.
+
+
+
+task7:
+command:
+mkdir ~/project_documents/archive
+Explanation:
+I used the mkdir command to create a new subdirectory named "archive" within the project_documents folder. I observed that the folder structure was successfully updated to include this new location for storage.
+
+
+
+task8:
+command:
+mv ~/project_documents/plan_copy.txt ~/project_documents/archive/
+Explanation:
+I used the mv command to relocate plan_copy.txt from the main project folder into the "archive" subdirectory. I observed that the file was successfully transferred, leaving only the original file in the parent directory.
+
+
+task9:
+command:
+ls -R ~/project_documents
+Explanation:
+I used the ls command with the -R flag to perform a recursive listing. I observed the terminal outputting the contents of project_documents as well as the contents of the archive subdirectory, providing a full view of the folder hierarchy.
+
+
+
+task10:
+command:
+readlink -f ~/project_documents/archive/plan_copy.txt
+Explanation:
+I used the readlink command with the -f flag to resolve and display the full absolute path of the file starting from the root directory. I observed the complete path, which confirms the file's exact location within the system's file hierarchy.

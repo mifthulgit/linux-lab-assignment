@@ -1,0 +1,106 @@
+task1:
+command:
+echo "This is some sample text for data analysis." > ~/sample_data.txt
+
+Explanation:
+I used the echo command combined with the redirection operator (>) to create the sample_data.txt file in my home directory and populate it with a sample sentence. I observed that the file was generated and the text was saved successfully in a single step.
+
+
+
+task2:
+command:
+ln ~/sample_data.txt ~/sample_hard.txt
+
+Explanation:
+I used the ln command to create a hard link between the original file and a new entry named sample_hard.txt. I observed that both filenames now point to the same underlying data on the disk, meaning changes to one will immediately reflect in the other.
+
+
+task3:
+command:
+ln -s ~/sample_data.txt ~/sample_soft.txt
+
+Explanation:I used the ln command with the -s flag to create a symbolic link (soft link) named sample_soft.txt. Unlike a hard link, this acts as a shortcut or pointer that references the path of the original sample_data.txt file.
+
+
+task4:
+command:
+ls -i ~/sample_data.txt ~/sample_hard.txt ~/sample_soft.txt
+
+output:
+46456 /home/mifta/sample_data.txt  46456 /home/mifta/sample_hard.txt  46457 /home/mifta/sample_soft.txt
+
+Explanation:
+I used the ls command with the -i flag to display the inode (index node) numbers for all three files. I observed that sample_data.txt and sample_hard.txt share the exact same inode number because they are direct pointers to the same data on the disk. In contrast, sample_soft.txt has a unique inode number because it is a separate file that simply stores the path to the original.
+
+
+
+
+
+
+task5:
+command:
+ ls -li ~/sample_data.txt ~/sample_hard.txt ~/samp
+le_soft.txt
+
+output:
+46456 -rw-r--r-- 2 mifta mifta 44 Jan  5 00:10 /home/mifta/sample_data.txt
+46456 -rw-r--r-- 2 mifta mifta 44 Jan  5 00:10 /home/mifta/sample_hard.txt
+46457 lrwxrwxrwx 1 mifta mifta 27 Jan  5 00:17 /home/mifta/sample_soft.txt -> /home/mifta/sample_data.txt
+
+Explanation:
+Based on the file operations performed, the following files share the same inode number:
+
+sample_data.txt
+
+sample_hard.txt
+
+
+
+
+task6:
+command:
+stat ~/sample_data.txt
+
+Explanation:
+I used the stat command to provide a comprehensive view of the file's metadata. While ls -l gives a good summary, stat offers a deeper look into the file's status.
+
+
+
+task7:
+command:
+du -sh ~
+output:
+68K     /home/mifta
+Explanation:
+I used the du command with the -s and -h flags. I observed the total disk usage of my home directory summarized in a human-readable format (like MB or GB), which allows me to quickly check how much space my files are occupying.
+
+
+
+task8:
+command:
+ls -lh ~
+output:total 16K
+drwxr-xr-x 2 mifta mifta 4.0K Dec 10 23:27 first_folder
+drwxr-xr-x 3 mifta mifta 4.0K Jan  4 23:16 project_documents
+-rw-r--r-- 2 mifta mifta   44 Jan  5 00:10 sample_data.txt
+-rw-r--r-- 2 mifta mifta   44 Jan  5 00:10 sample_hard.txt
+lrwxrwxrwx 1 mifta mifta   27 Jan  5 00:17 sample_soft.txt -> /home/mifta/sample_data.txt
+Explanation:
+I used the ls command with the -l (long format) and -h (human-readable) flags to view my home directory. I observed the specific size of each file, such as sample_data.txt and sample_hard.txt, displayed in bytes, KB, or MB, making it easy for me to compare their footprint on the disk.
+
+
+
+task9:
+command:
+rm ~/sample_soft.txt
+ls -l ~/sample_data.txt
+
+Explanation:
+: I used the rm command to delete the symbolic link sample_soft.txt. I then executed ls -l to verify the status of sample_data.txt. I observed that the original file remains perfectly intact and accessible. This is because a symbolic link is merely a pointer to a filename; removing the pointer does not affect the actual data or the file it was referencing.
+
+
+task10:
+command:df -h
+du -ah ~/project_documents
+Explanation:
+I used the df and du commands with specific flags to analyze my system's storage from two different perspectives.
